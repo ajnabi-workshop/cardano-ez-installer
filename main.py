@@ -9,9 +9,9 @@ from src.utils import ind, print_success
 from src.config_vars import make_cfg
 from src.dotfiles import update_dotfiles
 from src.paths import make_paths
-from src.install import install_node, download_node_configs, prompt_install_aiken, prompt_install_ogmios
+from src.install import prompt_install_node, prompt_install_aiken, prompt_install_ogmios
 
-VERSION = 0.3
+VERSION = 0.4
 
 
 def install() -> None | NoReturn:
@@ -25,14 +25,13 @@ def install() -> None | NoReturn:
     nix_conf_ready = check_nix_conf()
 
     cfg = make_cfg()
+    paths = make_paths(cfg)
 
     if nix_conf_ready:
-        install_node(cfg)
+        prompt_install_node(cfg, paths)
     else:
         sys.exit(1)
 
-    paths = make_paths(cfg)
-    download_node_configs(paths)
     update_dotfiles(paths)
     prompt_install_aiken(cfg)
     prompt_install_ogmios(cfg)

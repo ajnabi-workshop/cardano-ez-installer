@@ -9,13 +9,13 @@ from .paths import Network, NetworkPaths, Paths
 
 def install_node(cfg: ConfigVars) -> None | NoReturn:
     original_cwd = os.getcwd()
-    print_neutral(f"\n{ind('Installing cardano-node...')}")
+    print_neutral(f"\n{ind('Installing cardano-node (be patient!)...')}")
 
     os.chdir(cfg['CARDANO_SRC_PATH'])
 
     if not os.path.exists("cardano-node"):
         run(
-            ["git", "clone", "https://github.com/input-output-hk/cardano-node"],
+            ["git", "clone", "https://github.com/intersectMBO/cardano-node"],
             "Error cloning cardano-node repository")
         os.chdir("cardano-node")
     else:
@@ -52,7 +52,7 @@ def install_node(cfg: ConfigVars) -> None | NoReturn:
     run_quiet(
         ["nix", "profile", "remove", ".*cardano-cli*"],
         "Error removing cardano-cli from nix profile")
-    run_quiet(
+    run(
         ["nix", "profile", "install", "--accept-flake-config",
          "--extra-substituters", "https://cache.zw3rk.com",
          "--extra-trusted-public-keys",
@@ -64,6 +64,20 @@ def install_node(cfg: ConfigVars) -> None | NoReturn:
 
     os.chdir(original_cwd)
 
+def prompt_install_node(cfg: ConfigVars, paths: Paths) -> None | NoReturn:
+    while True:
+        user_input = input("Do you want to install Cardano Node & CLI? (Y/n): ").lower()
+        print("")
+
+        if user_input == 'y' or user_input == '':
+            install_node(cfg)
+            download_node_configs(paths)
+            break
+        elif user_input == 'n':
+            break
+        else:
+            print("Invalid response. Please enter 'Y' to install or 'N' to cancel.")
+            continue
 
 def prompt_install_aiken(cfg: ConfigVars) -> None | NoReturn:
     while True:
