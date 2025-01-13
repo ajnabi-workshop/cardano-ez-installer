@@ -77,7 +77,7 @@ def check_set_attr(
 
 def check_nix_conf() -> bool:
     print_neutral(f'\n{ind("Checking nix.conf...")}')
-    nix_conf_output = subprocess.check_output(["nix", "config", "show", "--json"])
+    nix_conf_output = subprocess.check_output(["nix", "show-config", "--json"])
     nix_conf_json = json.loads(nix_conf_output)
     req_attributes = get_required_attributes()
     check_set_attr_ = partial(check_set_attr, nix_conf_json, req_attributes)
