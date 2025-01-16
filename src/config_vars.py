@@ -10,7 +10,6 @@ from .utils import ind, ind2, print_fail, print_neutral, print_success
 ConfigVars = TypedDict('ConfigVars', {
     'NODE_RELEASE': str,
     'AIKEN_RELEASE': str,
-    'OGMIOS_RELEASE': str,
     'CARDANO_PATH': str,
     'CARDANO_SRC_PATH': str
 })
@@ -54,9 +53,6 @@ def check_aiken_release_var(release: str) -> str | None:
     check_release_var("aiken-lang", "aiken", f"v{release}")
 
 
-def check_ogmios_release_var(release: str) -> str | None:
-    # ogmios prefixes release tags with 'v' (but we omit this in .env)
-    check_release_var("CardanoSolutions", "ogmios", f"v{release}")
 
 
 def check_path_var(val: str) -> str | None:
@@ -73,7 +69,6 @@ def make_cfg() -> ConfigVars | NoReturn:
     var_checks = {
         'NODE_RELEASE': check_node_release_var,
         'AIKEN_RELEASE': check_aiken_release_var,
-        'OGMIOS_RELEASE': check_ogmios_release_var,
         'CARDANO_SRC_PATH': check_path_var,
         'CARDANO_PATH': check_path_var,
     }
@@ -96,7 +91,6 @@ def make_cfg() -> ConfigVars | NoReturn:
     return {
         'NODE_RELEASE': cfg['NODE_RELEASE'],
         'AIKEN_RELEASE': cfg['AIKEN_RELEASE'],
-        'OGMIOS_RELEASE': cfg['OGMIOS_RELEASE'],
         'CARDANO_PATH': cfg['CARDANO_PATH'],
         'CARDANO_SRC_PATH': cfg['CARDANO_SRC_PATH']
     }

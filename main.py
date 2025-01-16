@@ -9,7 +9,7 @@ from src.utils import ind, print_success
 from src.config_vars import make_cfg
 from src.dotfiles import update_dotfiles
 from src.paths import make_paths
-from src.install import prompt_install_node, prompt_install_aiken, prompt_install_ogmios
+from src.install import prompt_install_node, prompt_install_aiken
 
 VERSION = 0.4
 
@@ -34,7 +34,7 @@ def install() -> None | NoReturn:
 
     update_dotfiles(paths)
     prompt_install_aiken(cfg)
-    prompt_install_ogmios(cfg)
+    
 
     print_success(ind(
         f"Installation complete!\n"))
