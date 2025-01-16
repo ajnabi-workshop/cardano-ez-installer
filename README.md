@@ -1,6 +1,6 @@
 # **Cardano EZ-Installer**
 
-A quick and easy way to install `cardano-node`, `cardano-cli`, and `ogmios` using Nix.
+A quick and easy way to install `cardano-node`, and `cardano-cli` using Nix.
 
 ## **Installation**
 
@@ -158,17 +158,14 @@ If you don't want to use the Guru, you can follow the instructions below to use 
   >**NOTE:** when you're finished, remember to close the node connection by typing `CTRL + c` in the terminal session where it's running. 
 
 ***
-## **Updating `cardano-node`, `cardano-cli`, and `ogmios`**
+## **Updating `cardano-node`, and `cardano-cli` **
 
-Updating `cardano-node`, `cardano-cli`, and `ogmios` is simple.
+Updating `cardano-node`, and `cardano-cli` is simple.
 
 ### **To update `cardano-node` and `cardano-cli`:**
 - Change the version number for the `NODE_RELEASE` variable in `.env`.
 - Run `./install.sh` to update.
 
-### **To update `ogmios`:**
-- Change the version number for the `OGMIOS_RELEASE` variable in `.env`.
-- Run `./install.sh` to update.
 
 ***
 ## **Troubleshooting**
